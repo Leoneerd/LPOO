@@ -16,18 +16,22 @@ public class Box extends Shape {
         this.halfSizeZ = halfSizeZ;
     }
 
+    @Override
     public float getVolume() {
         return 8 * halfSizeX * halfSizeY * halfSizeZ;
     }
 
+    @Override
     public float getSurfaceArea() {
         return 8 * (halfSizeX * halfSizeY + halfSizeX * halfSizeZ + halfSizeY * halfSizeZ);
     }
 
+    @Override
     public Vector3 getCenterOfMass() {
         return Vector3.NULL;
     }
 
+    @Override
     public Matrix3 getInertialTensor() {
         float mass = getMass();
 
@@ -38,6 +42,7 @@ public class Box extends Shape {
         return Matrix3.diagonal(Ixx, Iyy, Izz);
     }
 
+    @Override
     public Bounds3 getBounds() {
         Vector3 min = new Vector3(-halfSizeX, -halfSizeY, -halfSizeZ);
         Vector3 max = new Vector3(halfSizeX, halfSizeY, halfSizeZ);
