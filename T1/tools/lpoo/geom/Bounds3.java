@@ -33,14 +33,14 @@ public final class Bounds3
   public Bounds3 expand(Vector3 p)
   {
     this.min = Vector3.min(min, p);
-    this.max = Vector3.min(max, p);
+    this.max = Vector3.max(max, p);
     return this;
   }
 
   public Bounds3 expand(final Bounds3 b)
   {
     this.min = Vector3.min(min, b.min);
-    this.max = Vector3.min(max, b.max);
+    this.max = Vector3.max(max, b.max);
     return this;
   }
 

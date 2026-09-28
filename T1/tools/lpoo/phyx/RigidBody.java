@@ -1,4 +1,4 @@
-package lpoo.physx;
+package lpoo.phyx;
 
 import lpoo.geom.*;
 import lpoo.math.*;

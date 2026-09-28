@@ -18,9 +18,4 @@ public class Real
     return isZero(a - b);
   }
 
-  public Real(float value)
-  {
-    this.value = value;
-  }
-
 } // Real
