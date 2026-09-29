@@ -17,6 +17,18 @@ public class RigidBody {
         this.pose = pose;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Shape getShape() {
+        return shape;
+    }
+
+    public Pose getPose() {
+        return pose;
+    }
+
     public float getMass() {
         return shape.getMass();
     }
