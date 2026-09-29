@@ -11,6 +11,11 @@ public class Sphere extends Shape {
         this.radius = radius;
     }
 
+    public Sphere(String name, float density, Pose pose, float radius) {
+        super(name, density, pose);
+        this.radius = radius;
+    }
+
     @Override
     public float getVolume() {
         return (float)((4.0/3.0) * Math.PI * radius * radius * radius);

@@ -16,6 +16,13 @@ public class Box extends Shape {
         this.halfSizeZ = halfSizeZ;
     }
 
+    public Box(String name, float density, Pose pose, float halfSizeX, float halfSizeY, float halfSizeZ) {
+        super(name, density, pose);
+        this.halfSizeX = halfSizeX;
+        this.halfSizeY = halfSizeY;
+        this.halfSizeZ = halfSizeZ;
+    }
+
     @Override
     public float getVolume() {
         return 8 * halfSizeX * halfSizeY * halfSizeZ;

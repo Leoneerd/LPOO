@@ -1,15 +1,23 @@
 package lpoo.geom;
 
+import lpoo.math.Quaternion;
 import lpoo.math.Matrix3;
 import lpoo.math.Vector3;
 
 public abstract class Shape {
+
     private final String name;
     private final float density;
+    private final Pose pose;
 
     protected Shape(String name, float density) {
+        this(name, density, new Pose(Vector3.NULL, Quaternion.IDENTITY));
+    }
+
+    protected Shape(String name, float density, Pose pose) {
         this.name = name;
         this.density = density;
+        this.pose = pose;
     }
 
     public String getName() {
@@ -22,6 +30,10 @@ public abstract class Shape {
 
     public  float getMass() {
         return density * getVolume();
+    }
+
+    public Pose getPose() {
+        return pose;
     }
 
     public abstract float getSurfaceArea();

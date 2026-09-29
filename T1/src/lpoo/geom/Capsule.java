@@ -13,6 +13,12 @@ public class Capsule extends Shape {
         this.halfHeight = halfHeight;
     }
 
+    public Capsule(String name, float density, Pose pose, float radius, float halfHeight) {
+        super(name, density, pose);
+        this.radius = radius;
+        this.halfHeight = halfHeight;
+    }
+
     @Override
     public float getVolume() {
         return (float)((2 * Math.PI * radius * radius * halfHeight) + ((4.0/3.0) * Math.PI * radius * radius * radius));
