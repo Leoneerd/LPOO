@@ -3,6 +3,7 @@ package lpoo.util;
 import lpoo.phyx.RigidBody;
 import lpoo.geom.Shape;
 import lpoo.geom.CompoundShape;
+import lpoo.geom.CompoundShapeInstance;
 import lpoo.geom.Bounds3;
 import lpoo.math.Matrix3;
 import lpoo.math.Vector3;
@@ -53,10 +54,15 @@ public final class SceneReport {
         out.println(shape.getInertialTensor());
         out.println(indent + "Bounds: " + shape.getBounds());
 
-        if (shape instanceof CompoundShape) {
-            CompoundShape compound = (CompoundShape) shape;
-            List<Shape> children = compound.getChildren();
+        List<Shape> children = null;
 
+        if (shape instanceof CompoundShape) {
+            children = ((CompoundShape) shape).getChildren();
+        } else if (shape instanceof CompoundShapeInstance) {
+            children = ((CompoundShapeInstance) shape).getChildren();
+        }
+
+        if (children != null) {
             for (int i = 0; i < children.size(); i++) {
                 Shape child = children.get(i);
                 writeShape(child, out, indent + " ");
