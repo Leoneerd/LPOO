@@ -2,19 +2,34 @@ package lpoo.geom;
 
 import lpoo.math.Matrix3;
 import lpoo.math.Vector3;
+import lpoo.exception.BadDimensionsException;
 
 public class Capsule extends Shape {
     private final float radius;
     private final float halfHeight;
 
-    public Capsule(String name, float density, float radius, float halfHeight) {
+    public Capsule(String name, float density, float radius, float halfHeight) throws BadDimensionsException {
         super(name, density);
+        validateDensity(density);
+        if (radius <= 0.0f) {
+            throw new BadDimensionsException(name + " o valor precisa ser maior que zero " + radius);
+        }
+        if (halfHeight <= 0.0f) {
+            throw new BadDimensionsException(name + " o valor precisa ser maior que zero" + halfHeight);
+        }
         this.radius = radius;
         this.halfHeight = halfHeight;
     }
 
-    public Capsule(String name, float density, Pose pose, float radius, float halfHeight) {
+    public Capsule(String name, float density, Pose pose, float radius, float halfHeight) throws BadDimensionsException {
         super(name, density, pose);
+        validateDensity(density);
+        if (radius <= 0.0f) {
+            throw new BadDimensionsException(name + " o valor precisa ser maior que zero " + radius);
+        }
+        if (halfHeight <= 0.0f) {
+            throw new BadDimensionsException(name + " o valor precisa ser maior que zero" + halfHeight);
+        }
         this.radius = radius;
         this.halfHeight = halfHeight;
     }

@@ -9,6 +9,7 @@ public class MeshShape extends Shape {
 
     public MeshShape(String name, float density, Pose pose, TriangleMesh mesh) {
         super(name, density, pose);
+        validateDensity(density);
         this.mesh = mesh;
         this.massProperties = computeMassProperties(mesh, getDensity());
     }

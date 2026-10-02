@@ -2,17 +2,26 @@ package lpoo.geom;
 
 import lpoo.math.Matrix3;
 import lpoo.math.Vector3;
+import lpoo.exception.BadDimensionsException;
 
 public class Sphere extends Shape {
     private final float radius;
 
-    public Sphere(String name, float density, float radius) {
+    public Sphere(String name, float density, float radius) throws BadDimensionsException {
         super(name, density);
+        validateDensity(density);
+        if (radius <= 0) {
+            throw new BadDimensionsException(name + " o valor precisa ser maior que zero " + radius);
+        }
         this.radius = radius;
     }
 
-    public Sphere(String name, float density, Pose pose, float radius) {
+    public Sphere(String name, float density, Pose pose, float radius) throws BadDimensionsException {
         super(name, density, pose);
+        validateDensity(density);
+        if (radius <= 0) {
+            throw new BadDimensionsException(name + " o valor precisa ser maior que zero " + radius);
+        }
         this.radius = radius;
     }
 

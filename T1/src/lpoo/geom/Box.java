@@ -3,21 +3,36 @@ package lpoo.geom;
 
 import lpoo.math.Matrix3;
 import lpoo.math.Vector3;
+import lpoo.exception.BadDimensionsException;
 
 public class Box extends Shape {
     private final float halfSizeX;
     private final float halfSizeY;
     private final float halfSizeZ;
 
-    public Box(String name, float density, float halfSizeX, float halfSizeY, float halfSizeZ) {
+    private static void validateHalfSize(String parameter, float value) throws BadDimensionsException {
+        if (value <= 0.0f) {
+            throw new BadDimensionsException(parameter + " o valor precisa ser maior que zero " + value);
+        }
+    }
+
+    public Box(String name, float density, float halfSizeX, float halfSizeY, float halfSizeZ) throws BadDimensionsException {
         super(name, density);
+        validateDensity(density);
+        validateHalfSize("halfSizeX", halfSizeX);
+        validateHalfSize("halfSizeY", halfSizeY);
+        validateHalfSize("halfSizeZ", halfSizeZ);
         this.halfSizeX = halfSizeX;
         this.halfSizeY = halfSizeY;
         this.halfSizeZ = halfSizeZ;
     }
 
-    public Box(String name, float density, Pose pose, float halfSizeX, float halfSizeY, float halfSizeZ) {
+    public Box(String name, float density, Pose pose, float halfSizeX, float halfSizeY, float halfSizeZ) throws BadDimensionsException {
         super(name, density, pose);
+        validateDensity(density);
+        validateHalfSize("halfSizeX", halfSizeX);
+        validateHalfSize("halfSizeY", halfSizeY);
+        validateHalfSize("halfSizeZ", halfSizeZ);
         this.halfSizeX = halfSizeX;
         this.halfSizeY = halfSizeY;
         this.halfSizeZ = halfSizeZ;

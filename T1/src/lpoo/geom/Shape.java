@@ -10,6 +10,12 @@ public abstract class Shape {
     private final float density;
     private final Pose pose;
 
+    protected static void validateDensity(float density) {
+        if (density <= 0.0f) {
+            throw new IllegalArgumentException("Densidade precisa ser maior que zero " + density);
+        }
+    }
+
     protected Shape(String name, float density) {
         this(name, density, new Pose(Vector3.NULL, Quaternion.IDENTITY));
     }
