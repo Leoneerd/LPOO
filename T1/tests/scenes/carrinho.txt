@@ -1,0 +1,32 @@
+# Cena de teste completa: nome da cena = "carrinho"
+# Dimensoes sao MEIAS dimensoes; rot e um quaternio (x y z w), normalizado na leitura.
+
+# ---- Parte 1: formas compostas reutilizaveis ----
+define composite eixo {
+  cylinder barra 1.0 0.1 1.0 rot 0 0 0.7071068 0.7071068   # deitado ao longo de x
+  sphere pontaEsq 1.0 0.2 pos -1 0 0
+  sphere pontaDir 1.0 0.2 pos 1 0 0
+}
+
+define composite chassi {
+  box base 0.5 2.0 0.2 1.0
+  composite suportes pos 0 -0.3 0 {          # composta aninhada
+    box suporteA 0.5 0.1 0.1 0.1 pos -1 0 0
+    box suporteB 0.5 0.1 0.1 0.1 pos 1 0 0
+  }
+}
+
+# ---- Parte 2: atores ----
+actor carrinho pos 0 1 0 rot 0 0.258819 0 0.965926 {   # ~30 graus em y
+  composite corpo {
+    instance chassi1 chassi
+    instance eixoFrente eixo pos 1.5 -0.5 0
+    instance eixoTras eixo pos -1.5 -0.5 0     # mesma definicao reutilizada
+  }
+}
+
+actor bola pos 5 0.5 0 { sphere esfera 0.8 0.5 }
+actor pilula pos -5 1 0 rot 0 0 0.382683 0.923880 { capsule capsula 1.2 0.3 0.7 }
+actor caixote pos 0 0.5 5 { box caixa 2.0 0.5 0.5 0.5 }
+actor lata pos 0 0 -5 { cylinder cilindro 1.0 0.4 0.6 }
+actor malha pos 8 0 0 { mesh cubo 1.0 cubo.obj }
