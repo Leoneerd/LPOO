@@ -1,3 +1,5 @@
+// Autor(es): Guilherme Duarte, Otavio Gabriel, Leonardo Leal
+
 package lpoo.phyx;
 
 import lpoo.geom.Bounds3;

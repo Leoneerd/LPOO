@@ -1,3 +1,5 @@
+// Autor(es): Guilherme Duarte, Otavio Gabriel, Leonardo Leal
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,3 +1,5 @@
+// Autor(es): Guilherme Duarte, Otavio Gabriel, Leonardo Leal
+
 package lpoo.util;
 
 import lpoo.phyx.RigidBody;
