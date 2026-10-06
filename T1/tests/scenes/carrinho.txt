@@ -4,8 +4,8 @@
 # ---- Parte 1: formas compostas reutilizaveis ----
 define composite eixo {
   cylinder barra 1.0 0.1 1.0 rot 0 0 0.7071068 0.7071068   # deitado ao longo de x
-  sphere pontaEsq 1.0 0.2 pos -1 0 0
-  sphere pontaDir 1.0 0.2 pos 1 0 0
+  sphere pontaEsq 1.0 0.2 pos -1.2 0 0
+  sphere pontaDir 1.0 0.2 pos 1.2 0 0
 }
 
 define composite chassi {
