@@ -1,0 +1,2 @@
+define composite c { }
+actor a { instance i c }

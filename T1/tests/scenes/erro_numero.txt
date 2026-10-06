@@ -1,0 +1,3 @@
+actor a {
+  box b 1 1 abc 1
+}
