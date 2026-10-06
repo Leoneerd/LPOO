@@ -1,4 +1,5 @@
-// Autor(es): <preencher nomes do grupo>
+// Autor(es): Guilherme Duarte, Otavio Gabriel, Leonardo Leal
+
 package lpoo.util;
 
 import lpoo.exception.BadDimensionsException;
@@ -29,18 +30,20 @@ import java.util.List;
 import java.util.Map;
 
 //Permite que qualquer um use e que não seja herdada por ninguém
-public final class SceneReader {
+public final class SceneReader
+{
 
     /** Nome da cena: nome do arquivo sem a extensao. */
-    public static String sceneName(File file) {
+    public static String sceneName(File file)
+    {
         String name = file.getName();
         int dot = name.lastIndexOf('.');
         return dot > 0 ? name.substring(0, dot) : name;
     }
 
-    /** Le o arquivo de cena e devolve os atores (corpos rigidos) na ordem do arquivo. */
+    //Lê o arquivo de cena e devolve os atores (corpos rigidos) na ordem do arquivo.
     public static List<RigidBody> read(File file)
-            throws FileNotFoundException, ErrorException {
+            throws FileNotFoundException, ErrorException{
         if (!file.isFile())
             throw new FileNotFoundException("arquivo nao encontrado: " + file);
         SceneReader reader = new SceneReader(file);
@@ -68,14 +71,16 @@ public final class SceneReader {
     private int next;
 
     //Construtor privado
-    private SceneReader(File file) {
+    private SceneReader(File file)
+    {
         this.file = file;
     }
 
 
 
 
-    private List<RigidBody> readFile() throws ErrorException {
+    private List<RigidBody> readFile() throws ErrorException
+    {
         //Cria  a lista de resultado, e se repete enquanto houver tokens.
         List<RigidBody> actors = new ArrayList<>();
         while (hasNext()) {
@@ -110,7 +115,8 @@ public final class SceneReader {
         return actors;
     }
 
-    private void readDefinition() throws ErrorException {
+    private void readDefinition() throws ErrorException
+    {
 
         //Após 'define' espera a palavra "composite"
         expect("composite");
@@ -130,7 +136,8 @@ public final class SceneReader {
     }
 
 
-    private RigidBody readActor() throws ErrorException {
+    private RigidBody readActor() throws ErrorException
+    {
         //Lê o nome e a posi
         String name = takeName();
         Pose pose = readPose();
@@ -153,7 +160,8 @@ public final class SceneReader {
     }
 
 
-    private List<Shape> readChildren(String owner) throws ErrorException {
+    private List<Shape> readChildren(String owner) throws ErrorException
+    {
         List<Shape> children = new ArrayList<>();
 
         //enquanto o proximo token não for "}", se o arquivo acabar antes, peek lança "fim de arquivo inesperado"  
@@ -173,7 +181,8 @@ public final class SceneReader {
 
 
 
-    private Shape readShape() throws ErrorException {
+    private Shape readShape() throws ErrorException
+    {
 
         //Lê o tipo e o nome
         String type = take();
@@ -195,17 +204,20 @@ public final class SceneReader {
                  à definição, mais a pose própria dela.
                 */
                 
-                case "box": {
+                case "box":
+                {
                     float d = positive("densidade");
                     float sx = positive("sx"), sy = positive("sy"), sz = positive("sz");
                     return new Box(name, d, readPose(), sx, sy, sz);
                 }
-                case "sphere": {
+                case "sphere":
+                {
                     float d = positive("densidade");
                     float r = positive("raio");
                     return new Sphere(name, d, readPose(), r);
                 }
-                case "cylinder": {
+                case "cylinder": 
+                {
                     float d = positive("densidade");
                     float r = positive("raio"), s = positive("s");
                     return new Cylinder(name, d, readPose(), r, s);
@@ -215,18 +227,21 @@ public final class SceneReader {
                     float r = positive("raio"), s = positive("s");
                     return new Capsule(name, d, readPose(), r, s);
                 }
-                case "mesh": {
+                case "mesh": 
+                {
                     float d = positive("densidade");
                     String path = takeName();
                     Pose pose = readPose();
                     return new MeshShape(name, d, pose, readMesh(path));
                 }
-                case "composite": {
+                case "composite": 
+                {
                     Pose pose = readPose();
                     expect("{");
                     return new CompoundShape(name, pose, readChildren(name));
                 }
-                case "instance": {
+                case "instance": 
+                {
                     String defName = takeName();
                     CompoundShape def = definitions.get(defName);
 
@@ -239,36 +254,39 @@ public final class SceneReader {
                 default:
                     throw error("tipo de forma desconhecido: '" + type + "'");
             }
-        } catch (BadDimensionsException | IllegalArgumentException e) {
+        } 
+        
+        catch (BadDimensionsException | IllegalArgumentException e) {
             throw error(e.getMessage());
         }
     }
 
 
     //estudar mais profundamente
-    private TriangleMesh readMesh(String path) throws ErrorException {
+    private TriangleMesh readMesh(String path) throws ErrorException 
+    {
         File obj = new File(path);
 
         if (!obj.isAbsolute() && file.getAbsoluteFile().getParentFile() != null)
             obj = new File(file.getAbsoluteFile().getParentFile(), path);
-        try {
+        try 
+        {
             return ObjReader.read(obj);
-        } catch (IOException | RuntimeException e) {
+        } 
+
+        catch (IOException | RuntimeException e) 
+        {
             throw error("nao foi possivel ler a malha '" + path + "': " + e.getMessage());
         }
     }
 
-    // ------------------------------------------------------------------
-    // Pose, vetores e quaternios
-    // ------------------------------------------------------------------
-
-
     //pose "neutra": retorna posição zero, sem rotação
-    private static Pose identity() {
+    private static Pose identity() 
+    {
         return new Pose(Vector3.NULL, Quaternion.IDENTITY);
     }
 
-    /** Le [pos x y z] e [rot qx qy qz qw], opcionais e em qualquer ordem. */
+    //Le [pos x y z] e [rot qx qy qz qw], opcionais e em qualquer ordem.
     private Pose readPose() throws ErrorException {
 
         //Inicia com a posição neutra
@@ -277,27 +295,33 @@ public final class SceneReader {
         boolean hasPos = false, hasRot = false;
 
         //Enquanto há proximo
-        while (hasNext()) {
+        while (hasNext()) 
+        {
 
             //Pega o próximo token sem consumi-lo
             String t = peek();
 
             //se for == "pos" e ainda não leu nenhum "pos"
-            if (t.equals("pos") && !hasPos) {
+            if (t.equals("pos") && !hasPos) 
+            {
                 //Consome e lê 3 numeros
                 take();
                 position = readVector3();
                 hasPos = true;
 
                 //Mesma coisa com "rot"
-            } else if (t.equals("rot") && !hasRot) {
+            } 
+            else if (t.equals("rot") && !hasRot) 
+            {
                 //Porém consome e lê 4
                 take();
                 orientation = readQuaternion();
                 hasRot = true;
 
                 //Senão encerra o laço sem consumir nada
-            } else
+            } 
+            
+            else
                 break;
         }
 
@@ -306,7 +330,8 @@ public final class SceneReader {
     }
 
     //Lê os três números e monta o vetor
-    private Vector3 readVector3() throws ErrorException {
+    private Vector3 readVector3() throws ErrorException 
+    {
         float x = number("x");
         float y = number("y");
         float z = number("z");
@@ -316,7 +341,8 @@ public final class SceneReader {
     }
 
     //Lê um quaternio (x y z w) e calcula a norma: Pose exige quaternio unitario.
-    private Quaternion readQuaternion() throws ErrorException {
+    private Quaternion readQuaternion() throws ErrorException 
+    {
         float x = number("x");
         float y = number("y");
         float z = number("z");
@@ -333,12 +359,15 @@ public final class SceneReader {
     }
 
 
-    private void tokenize() throws IOException {
+    private void tokenize() throws IOException 
+    {
         //Abre o arquivo para leitura, try faz com que ele feche o mesmo ao final;
-        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader r = new BufferedReader(new FileReader(file))) 
+        {
             int n = 0;
             //Reponsável por contar o numero de linhas até acabar, n == nmr de linhas
-            for (String line; (line = r.readLine()) != null; ) {
+            for (String line; (line = r.readLine()) != null; ) 
+            {
                 n++;
                 //Verifica se é um token "#" e descarta todo o comentário
                 int c = line.indexOf('#');
@@ -350,29 +379,34 @@ public final class SceneReader {
                 //Linhas vazias são puladas
                 if (line.isEmpty())
                     continue;
-                for (String t : line.split("\\s+")) {
+                for (String t : line.split("\\s+")) 
+                {
                     tokens.add(t);
                     lines.add(n);
                 }
+                
             }
         }
     }
 
     //Verifica se ainda há tokens
-    private boolean hasNext() {
+    private boolean hasNext() 
+    {
         return next < tokens.size();
     }
 
 
     //Devolve o próximo token sem avançar. Se acabou, erro (protege o código de arquivos cortados)
-    private String peek() throws ErrorException {
+    private String peek() throws ErrorException 
+    {
         if (!hasNext())
             throw error("fim de arquivo inesperado");
         return tokens.get(next);
     }
 
     //Devolve o token e avança o ponteiro "next"
-    private String take() throws ErrorException {
+    private String take() throws ErrorException 
+    {
         String t = peek();
 
         next++;
@@ -380,7 +414,8 @@ public final class SceneReader {
     }
 
     //Lê um token e exige que seja esperado, exemplo "{"
-    private void expect(String expected) throws ErrorException {
+    private void expect(String expected) throws ErrorException 
+    {
         String t = take();
 
         if (!t.equals(expected))
@@ -389,7 +424,8 @@ public final class SceneReader {
 
 
     //Lê um nome e rejeita chaves no lugar
-    private String takeName() throws ErrorException {
+    private String takeName() throws ErrorException 
+    {
         String t = take();
 
         if (t.equals("{") || t.equals("}"))
@@ -399,7 +435,8 @@ public final class SceneReader {
 
 
     //Converte o token em float.
-    private float number(String what) throws ErrorException {
+    private float number(String what) throws ErrorException 
+    {
         String t = take();
 
         try {
@@ -408,7 +445,8 @@ public final class SceneReader {
             if (Float.isNaN(v) || Float.isInfinite(v))
                 throw new NumberFormatException();
             return v;
-        } catch (NumberFormatException e) {
+        } 
+        catch (NumberFormatException e) {
             throw error("numero invalido para " + what + ": '" + t + "'");
         }
     }
@@ -416,7 +454,8 @@ public final class SceneReader {
 
     /*Igual a number, porém exige valor maior que zero 
     (Densidade, Raio, Meias dimensões) */
-    private float positive(String what) throws ErrorException {
+    private float positive(String what) throws ErrorException 
+    {
         float v = number(what);
 
         if (v <= 0)
