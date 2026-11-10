@@ -1,0 +1,37 @@
+Command:
+  Eval
+| Diff
+| Define
+| Assignment
+| CLEAR NAME?
+| LIST
+| EXIT
+
+Eval:
+  EVAL "(" Expression "," Args ")"
+
+Args:
+  FLOAT "," FLOAT "," FLOAT
+
+Diff:
+  DIFF "(" Expression "," NAME ")"
+
+Define:
+  DEFINE NAME ("=" Expression)?
+
+Assignment:
+  NAME = Expression
+
+Expression:
+  Mul ("+" Mul | "-" Mul)*
+
+Mul:
+  Pow ("*" Pow | "/" Pow)*
+
+Pow:
+  ("+" | "-")? Primary ("^" Pow)?
+
+Primary:
+  NAME ("(" Expression ")")?
+| "(" Expression ")"
+| FLOAT
