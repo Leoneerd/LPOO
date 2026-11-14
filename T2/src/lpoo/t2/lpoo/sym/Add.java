@@ -15,7 +15,7 @@ public final class Add
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
     return (new Add(e1.diff(variable), e2.diff(variable))).simplify();
   }

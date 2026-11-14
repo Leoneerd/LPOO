@@ -45,23 +45,79 @@ public class Parser
       }
 
       String name = ((Token.Name)token).value();
+      Variable variable;
 
-      if (!name.equals("x") && !name.equals("y") && !name.equals("z")) {
-        error("Variable must be x, y, z");
+      if (name.equals("x")) {
+        variable = Variable.X;
+      } else if (name.equals("y")) {
+        variable = Variable.Y;
+      } else if (name.equals("z")) {
+        variable = Variable.Z;
+      } else {
+        error("Variable must be x, y, or z");
+        return null;
       }
 
       advance();
       match(TokenType.RPAREN);
 
       c = Command.diff;
-      c.setArguments(e, name.charAt(0));
-    }
+      c.setArguments(e, variable);
 
-    else if (token.type == TokenType.EXIT)
-    {
+    } else if (token.type == TokenType.DEFINE) {
+      advance();
+
+      if (token.type != TokenType.NAME) {
+        error(IDENTIFIER_EXPECTED);
+        return null;
+      }
+
+      String name = ((Token.Name)token).value();
+      advance();
+
+      Expression definition = null;
+      if (token.type == TokenType.ASSIGN_OP) {
+        advance();
+        definition = expression();
+      }
+
+      c = Command.define;
+      c.setArguments(name, definition);
+
+    } else if (token.type == TokenType.NAME) {
+      String name = ((Token.Name)token).value();
+      advance();
+      match(TokenType.ASSIGN_OP);
+
+      Expression expression = expression();
+
+      c = Command.assignment;
+      c.setArguments(name, expression);
+
+    } else if (token.type == TokenType.CLEAR) {
+      advance();
+      c = Command.clear;
+
+      if (token.type == TokenType.NAME) {
+        String name = ((Token.Name)token).value();
+        advance();
+        c.setArguments(name);
+      } else if (token.type == TokenType.EOI) {
+        c.setArguments();
+      } else {
+        error(SYNTAX);
+      }
+
+    } else if (token.type == TokenType.LIST) {
+      advance();
+      c = Command.list;
+      c.setArguments();
+
+    } else if (token.type == TokenType.EXIT) {
       advance(); // EXIT
       c = Command.exit;
     }
+    
     if (token.type != TokenType.EOI)
       error(SYNTAX);
     return c;

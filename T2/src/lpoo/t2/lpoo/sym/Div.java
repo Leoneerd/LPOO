@@ -15,7 +15,7 @@ public final class Div
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
     Expression t1 = (new Mul(e1.diff(variable), e2)).simplify();
     Expression t2 = (new Mul(e1, e2.diff(variable))).simplify();

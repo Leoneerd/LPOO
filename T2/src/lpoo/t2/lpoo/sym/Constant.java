@@ -22,7 +22,7 @@ public final class Constant
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
     return ZERO;
   }

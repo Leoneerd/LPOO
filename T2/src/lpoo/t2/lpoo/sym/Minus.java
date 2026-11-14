@@ -15,7 +15,7 @@ public final class Minus
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
     return (new Minus(e.diff(variable))).simplify();
   }

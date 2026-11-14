@@ -6,7 +6,8 @@ public abstract class UnaryExpression
   @Override
   public String toString()
   {
-    return op + e.toString();
+    String operand = e.isBinary() ? String.format("(%s)", e) : e.toString();
+    return op + operand;
   }
 
   protected Expression e;

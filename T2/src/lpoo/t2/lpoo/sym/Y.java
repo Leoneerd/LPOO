@@ -16,9 +16,9 @@ public final class Y
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
-    if (variable == 'y') {
+    if (variable == Variable.Y) {
       return Constant.ONE;
     } else {
       return Constant.ZERO;

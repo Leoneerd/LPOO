@@ -20,7 +20,7 @@ public final class Pow
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
     Expression exponent = e2.simplify();
 

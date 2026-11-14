@@ -3,7 +3,7 @@ package lpoo.sym;
 public abstract class Expression
 {
   public abstract float eval(float x, float y, float z);
-  public abstract Expression diff(char variable);
+  public abstract Expression diff(Variable variable);
 
   public Expression substituteX(Expression replacement) {
     return this;

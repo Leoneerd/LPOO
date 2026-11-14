@@ -25,9 +25,9 @@ public class Function
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
-    Expression f = new Function(function.diff('x'), arg); 
+    Expression f = new Function(function.diff(Variable.X), arg); 
     return (new Mul(f, arg.diff(variable))).simplify();
   }
 
@@ -71,7 +71,7 @@ final class Sin
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
     return COS;
   }
@@ -95,7 +95,7 @@ final class Cos
   }
 
   @Override
-  public Expression diff(char variable)
+  public Expression diff(Variable variable)
   {
     return new Minus(SIN);
   }
@@ -115,7 +115,7 @@ final class Loge extends NativeFunction {
   }
 
   @Override 
-  public Expression diff(char variable) {
+  public Expression diff(Variable variable) {
     return new Div(Constant.ONE, X.INSTANCE);
   }
 
