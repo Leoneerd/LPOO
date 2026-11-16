@@ -1,5 +1,9 @@
 package lpoo.sym;
 
+/**
+ *
+ * @author Leonardo Marcon Leal
+ */
 public class Function
   extends Expression
 {

@@ -1,5 +1,9 @@
 package lpoo.sym;
 
+/**
+ *
+ * @author Leonardo Marcon Leal
+ */
 public final class Add
   extends BinaryExpression
 {

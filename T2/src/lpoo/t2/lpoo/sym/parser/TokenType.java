@@ -2,7 +2,7 @@ package lpoo.sym.parser;
 
 /**
  *
- * @author insert your name here
+ * @author Leonardo Marcon Leal
  */
 enum TokenType
 {

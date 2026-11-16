@@ -6,7 +6,7 @@ import lpoo.util.*;
 
 /**
  *
- * @author insert your code here
+ * @author Leonardo Marcon Leal
  */
 public class Main
 {

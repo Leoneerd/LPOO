@@ -3,6 +3,10 @@ package lpoo.sym;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ *
+ * @author Leonardo Marcon Leal
+ */
 public final class SymbolTable {
     private static final TreeMap<String, Expression> symbols = new TreeMap<>();
 

@@ -4,7 +4,7 @@ import lpoo.sym.*;
 
 /**
  *
- * @author insert your name here
+ * @author Leonardo Marcon Leal
  */
 public class Parser
 {

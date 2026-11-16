@@ -2,7 +2,7 @@ package lpoo.sym.parser;
 
 /**
  *
- * @author Paulo Pagliosa
+ * @author Paulo Pagliosa, Leonardo Marcon Leal
  */
 public abstract class Input
 {

@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 /**
  *
- * @author insert your name here
+ * @author Leonardo Marcon Leal
  */
 final class Keywords
 {
