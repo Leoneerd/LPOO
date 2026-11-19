@@ -6,7 +6,7 @@ import lpoo.util.*;
 
 /**
  *
- * @author Leonardo Marcon Leal
+ * @author Guilherme Duarte Balduino, Leonardo Marcon Leal, Otávio Gabriel de Oliveira
  */
 public class Main
 {

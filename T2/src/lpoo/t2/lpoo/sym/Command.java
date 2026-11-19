@@ -4,7 +4,7 @@ import lpoo.util.Console;
 
 /**
  *
- * @author insert your name here
+ * @author Guilherme Duarte Balduino, Leonardo Marcon Leal, Otávio Gabriel de Oliveira
  */
 public abstract class Command
 {

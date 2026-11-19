@@ -2,7 +2,7 @@ package lpoo.sym.parser;
 
 /**
  *
- * @author Leonardo Marcon Leal
+ * @author Guilherme Duarte Balduino, Leonardo Marcon Leal, Otávio Gabriel de Oliveira
  */
 enum TokenType
 {

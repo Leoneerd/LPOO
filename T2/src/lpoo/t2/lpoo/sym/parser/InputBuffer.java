@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author Paulo Pagliosa, Leonardo Marcon Leal
+ * @author Paulo Pagliosa, Guilherme Duarte Balduino, Leonardo Marcon Leal, Otávio Gabriel de Oliveira
  */
 public final class InputBuffer extends Input
 {

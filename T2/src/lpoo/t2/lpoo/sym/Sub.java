@@ -2,7 +2,7 @@ package lpoo.sym;
 
 /**
  *
- * @author Leonardo Marcon Leal
+ * @author Guilherme Duarte Balduino, Leonardo Marcon Leal, Otávio Gabriel de Oliveira
  */
 public final class Sub
   extends BinaryExpression

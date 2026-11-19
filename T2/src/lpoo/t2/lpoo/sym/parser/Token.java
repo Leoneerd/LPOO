@@ -2,7 +2,7 @@ package lpoo.sym.parser;
 
 /**
  *
- * @author Paulo Pagliosa, Leonardo Marcon Leal
+ * @author Paulo Pagliosa, Guilherme Duarte Balduino, Leonardo Marcon Leal, Otávio Gabriel de Oliveira
  */
 public class Token
 {
